@@ -2,10 +2,13 @@ package com.example.databindingtest.util
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
+import androidx.core.widget.ImageViewCompat
 import androidx.databinding.BindingAdapter
 import com.example.databindingtest.R
 import com.example.databindingtest.data.Popularity
@@ -34,6 +37,16 @@ fun tintPopularity(view: ProgressBar, popularity: Popularity) {
     }
 }
 
+//Image Icon 지정 여부
+@BindingAdapter("app:popularityIcon")
+fun popularityIcon(view: ImageView, popularity: Popularity) {
+    val color = getAssociatedColor(popularity, view.context)
+
+    ImageViewCompat.setImageTintList(view, ColorStateList.valueOf(color))
+
+    view.setImageDrawable(getDrawablePopularity(popularity, view.context))
+}
+
 private fun getAssociatedColor(popularity: Popularity, context: Context): Int {
     return when (popularity) {
         Popularity.NORMAL -> context.theme.obtainStyledAttributes(
@@ -41,5 +54,19 @@ private fun getAssociatedColor(popularity: Popularity, context: Context): Int {
         ).getColor(0, 0x000000)
         Popularity.POPULAR -> ContextCompat.getColor(context, android.R.color.holo_green_light)
         Popularity.STAR -> ContextCompat.getColor(context, android.R.color.holo_red_dark)
+    }
+}
+
+private fun getDrawablePopularity(popularity: Popularity, context: Context): Drawable? {
+    return when (popularity) {
+        Popularity.NORMAL -> {
+            ContextCompat.getDrawable(context, R.drawable.ic_person_black_96dp)
+        }
+        Popularity.POPULAR -> {
+            ContextCompat.getDrawable(context, R.drawable.ic_whatshot_black_96dp)
+        }
+        Popularity.STAR -> {
+            ContextCompat.getDrawable(context, R.drawable.ic_whatshot_black_96dp)
+        }
     }
 }
