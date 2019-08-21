@@ -5,6 +5,8 @@
     <data>
         <variable name="name" type="String"/>
         <variable name="lastName" type="String"/>
+        
+        <variable name="viewmodel" type="com.example.databindingtest.data.SimpleViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -13,7 +15,7 @@
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:id="@+id/plain_name"
-                  android:text="@{name}"
+                  android:text="@{viewmodel.name}"
                   app:layout_constraintStart_toStartOf="parent"
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintTop_toTopOf="parent"/>
@@ -21,9 +23,18 @@
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:id="@+id/plain_lastname"
-                  android:text="@{lastName}"
+                  android:text="@{viewmodel.lastName}"
                   app:layout_constraintStart_toStartOf="parent"
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintTop_toBottomOf="@+id/plain_name"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/like_button"
+                android:onClick="@{() -> viewmodel.onLike()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
