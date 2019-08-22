@@ -13,6 +13,7 @@ import androidx.databinding.BindingAdapter
 import com.example.databindingtest.R
 import com.example.databindingtest.data.Popularity
 
+
 //progress visibility 여부
 @BindingAdapter("app:hideIfZero")
 fun hideIfZero(view: View, number: Int) {
